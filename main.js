@@ -47,32 +47,22 @@ function doCommand(msg) {
       commandSuccess(msg)
       const embed = new Discord.MessageEmbed()
          .setColor("#3b3e42")
-         .setTitle("Ovie Bot")
+         .setTitle("Robdog Bot")
          .setAuthor("Created by Robdog#6848", "https://i.imgur.com/qfsnOig.jpg")
          .setDescription("**Current Commands:**\n" + printArr(commandsArr))
-         .setThumbnail(
-            "INSERT IMAGE"
-         )
+         .setThumbnail("INSERT IMAGE")
          .setTimestamp()
-         .setImage(
-            "INSERT IMAGE"
-         )
+         .setImage("INSERT IMAGE")
       msg.author.send(embed)
    } else if (command == "command1") {
       commandSuccess(msg)
-      msg.channel.send(
-         "INSERT GIF"
-      )
+      msg.channel.send("INSERT GIF")
    } else if (command == "command2") {
       commandSuccess(msg)
-      msg.channel.send(
-         "INSERT MP4"
-      )
+      msg.channel.send("INSERT MP4")
    } else if (command == "command3") {
       commandSuccess(msg)
-      msg.channel.send(
-         "INSERT IMAGE"
-      )
+      msg.channel.send("INSERT IMAGE")
    } else if (command == "ping") {
       commandSuccess(msg)
       msg.channel.send("Pinging...").then((sent) => {
