@@ -1,2 +1,2 @@
-# robdog-discord-bot-template
- Robdog Bot - Discord Template
+# Robdog Bot - Discord Template
+
