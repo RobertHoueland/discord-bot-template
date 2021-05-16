@@ -4,6 +4,10 @@ This is a template for a highly customizable discord bot that you can use yourse
 
 The bot will give a checkmark reaction to the message, and delete the command after 3 seconds. 
 
+**Make sure to read the entire instructions before using.** 
+
+Add me on discord *Robdog#6848* and show me your bots! Come ask questions too.
+
 ## Setup:
 
 You will need to install [Node.js](https://nodejs.org/en/), and clone this repo to somewhere on your device to edit. In a cmd located at your folder for the bot, run:
