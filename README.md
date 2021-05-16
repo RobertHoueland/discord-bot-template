@@ -4,26 +4,33 @@ This is a template for a highly customizable discord bot that you can use yourse
 
 The bot will give a checkmark reaction to the message, and delete the command after 3 seconds. 
 
-Setup:
-You will need to install [Node.js](https://nodejs.org/en/), and clone this repo to somewhere on your device to edit. In node.js, run:
+## Setup:
 
-`npm install dotenv`
-`npm install twit` - allows twitter functionality
-`npm install discord.js`
-`npm install ffmpeg-static` - allows sound files to be played in voice channels
-`npm install opusscript` - allows sound files to be played in voice channels
+You will need to install [Node.js](https://nodejs.org/en/), and clone this repo to somewhere on your device to edit. In a cmd located at your folder for the bot, run:
 
-Now you will have the correct npm packages installed. To run the bot on your computer:
+* `npm install dotenv`
+
+* `npm install twit` - allows twitter functionality
+
+* `npm install discord.js`
+
+* `npm install ffmpeg-static` - allows sound files to be played in voice channels
+
+* `npm install opusscript` - allows sound files to be played in voice channels
+
+Now you will have the correct npm packages installed. 
+
+### To run the bot on your computer:
 
 `npm start` OR `node main.js`
 
-Understanding the files:
+## Understanding the files:
 
-**config.json**
+* ### config.json
 
 This file allows you to customize the prefix of the bot command. The default is `;`
 
-**.env**
+* ### .env
 
 Your environment variables for each of the features.
 
@@ -35,14 +42,14 @@ TWITCH_CHANNEL_ID - This is the channel in your server that new twitch streaming
 
 TWITTER_CONSUMER_KEY and TWITTER_ACCESS_TOKEN (and secret) - For the twitter functionality to work, you will need a twitter developer API account. Go to their [page](https://developer.twitter.com/en/portal/dashboard) and sign up for use with a bot. Once you have an app created, you will be able to find each of these tokens on the page. 
 
-**package.json**
+* ### package.json
 
 Shows required versions for each of your dependencies and packages. You don't need to edit anything in here. Also has a script that allows `npm start` to function as `node main.js`
 
-**Procfile**
+* ### Procfile
 
 This file allows the bot to be run on [heroku](https://dashboard.heroku.com/), which I have used to host the bot so that it isn't always running on my computer. You can create an account and create a new app, but don't worry about the pipeline. In the "resources" tab, make sure to disable "web" and enable "worker" because this isn't a web app. There are instructions in the "deploy" tab to link your bot with the heroku. In the top right is "More" which allows you to "view logs."
 
-**main.js**
+* ### main.js
 
 This is where the action happens. You will want to customize `commandsArr` with what you want them to do. In the function `doCommand` you can add more commands, rename them, and remove them. There is a built in help command that will DM users an embed, so make sure to customize this. You can change any of the console.log() messages as you like, and change what the bot says when it prints to a channel at any time. Other than that, the only things you need to change are put in all capitals, like ADD IMAGE where you need add a link to your own image.
