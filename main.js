@@ -3,9 +3,11 @@ const Twit = require("twit")
 const Discord = require("discord.js")
 const client = new Discord.Client()
 const { prefix } = require("./config.json")
+// Alert console when bot starts
 console.log("BOT IS STARTING")
 console.log('USING PREFIX: "' + prefix + '"\n')
 
+// List of commands for help
 var commandsArr = [
    "**help** (or commands) - shows this menu",
    "**command1** - links gif",
@@ -45,7 +47,7 @@ client.on("message", (msg) => {
 })
 
 function doCommand(msg) {
-   let command = msg.content.substr(1).toLowerCase()
+   let command = msg.content.substr(1).toLowerCase() // Remove prefix
 
    if (command == "help" || command == "commands") {
       commandSuccess(msg)
@@ -122,6 +124,7 @@ client.on("message", async (msg) => {
 })
 
 client.on("voiceStateUpdate", (oldState, newState) => {
+   // If number of users change in voice channel after setTimeout, have bot leave
    if (
       oldState.channelID !== oldState.guild.me.voice.channelID ||
       newState.channel
@@ -134,7 +137,7 @@ client.on("voiceStateUpdate", (oldState, newState) => {
             oldState.channel.leave()
             console.log("Leaving voice channel after timeout")
          }
-      }, 30000)
+      }, 30000) // 30 second timer
 })
 
 var twitterVar = new Twit({
