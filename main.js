@@ -26,8 +26,12 @@ function printArr(arr) {
 }
 
 function commandSuccess(msg) {
-   setTimeout(() => msg.delete(), 3000) // Delete user's message 3 seconds after using command
    msg.react("✅")
+   if (msg.channel.type === "dm") {
+      console.log(msg.content + " was used by " + msg.author.tag)
+      return
+   } // Don't try to delete message in DM
+   setTimeout(() => msg.delete(), 3000) // Delete user's message 3 seconds after using command
    console.log(msg.content + " was used by " + msg.member.user.tag)
 }
 
@@ -77,15 +81,15 @@ client.on("message", async (msg) => {
       return // Prevent bot from replying to itself or other bot
    }
 
-   if (!msg.guild) {
-      console.log(
-         "Voice command was not run, not in server, used by " +
-            msg.member.user.tag
-      )
-      return
-   } // Voice commands can only be run in servers
-
    if (msg.content.toLowerCase() === prefix + "voice") {
+      if (!msg.guild) {
+         msg.author.send("Voice commands can not be used in DMs")
+         console.log(
+            "Voice command was not run, not in server, used by " +
+               msg.author.tag
+         )
+         return
+      } // Voice commands can only be run in servers
       commandSuccess(msg)
       if (msg.member.voice.channel) {
          const connection = await msg.member.voice.channel.join()
@@ -97,6 +101,14 @@ client.on("message", async (msg) => {
       }
    }
    if (msg.content.toLowerCase() === prefix + "leave") {
+      if (!msg.guild) {
+         msg.author.send("Voice commands can not be used in DMs")
+         console.log(
+            "Voice command was not run, not in server, used by " +
+               msg.author.tag
+         )
+         return
+      } // Voice commands can only be run in servers
       if (inVoice == 1) {
          commandSuccess(msg)
          msg.member.voice.channel.leave()
