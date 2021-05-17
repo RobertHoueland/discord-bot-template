@@ -99,7 +99,15 @@ client.on("message", async (msg) => {
          inVoice = 1
       } else {
          console.log("Voice command was not run, user not in voice channel")
-         msg.channel.send("You need to join a voice channel!")
+         msg.channel.send("You need to join a voice channel!").then((sent) => {
+            let id = sent.id
+            msg.channel.messages
+               .fetch(id)
+               .then((message) => {
+                  message.delete({ timeout: 5000 }) // Delete bot message after 5 seconds
+               })
+               .catch(console.error)
+         })
       }
    }
    if (msg.content.toLowerCase() === prefix + "leave") {
@@ -118,7 +126,15 @@ client.on("message", async (msg) => {
       } else {
          commandSuccess(msg)
          console.log("Leave voice was not run, user not in voice channel")
-         msg.channel.send("Bot is not in a voice channel!")
+         msg.channel.send("Bot is not in a voice channel!").then((sent) => {
+            let id = sent.id
+            msg.channel.messages
+               .fetch(id)
+               .then((message) => {
+                  message.delete({ timeout: 5000 }) // Delete bot message after 5 seconds
+               })
+               .catch(console.error)
+         })
       }
    }
 })
