@@ -71,7 +71,12 @@ function doCommand(msg) {
    }
 }
 
+var inVoice = 0
 client.on("message", async (msg) => {
+   if (msg.author == client.user || msg.author.bot) {
+      return // Prevent bot from replying to itself or other bot
+   }
+
    if (!msg.guild) {
       console.log(
          "Voice command was not run, not in server, used by " +
@@ -85,14 +90,22 @@ client.on("message", async (msg) => {
       if (msg.member.voice.channel) {
          const connection = await msg.member.voice.channel.join()
          const dispatcher = connection.play("INSERT MP3")
+         inVoice = 1
       } else {
          console.log("Voice command was not run, user not in voice channel")
          msg.channel.send("You need to join a voice channel!")
       }
    }
    if (msg.content.toLowerCase() === prefix + "leave") {
-      commandSuccess(msg)
-      msg.member.voice.channel.leave()
+      if (inVoice == 1) {
+         commandSuccess(msg)
+         msg.member.voice.channel.leave()
+         inVoice = 0
+      } else {
+         commandSuccess(msg)
+         console.log("Leave voice was not run, user not in voice channel")
+         msg.channel.send("Bot is not in a voice channel!")
+      }
    }
 })
 
