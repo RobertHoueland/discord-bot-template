@@ -33,7 +33,8 @@ function commandSuccess(msg) {
       console.log(msg.content + " was used by " + msg.author.tag)
       return
    } // Don't try to delete message in DM
-   setTimeout(() => msg.delete(), 3000) // Delete user's message 3 seconds after using command
+   setTimeout(() => msg.delete(), 3000)
+   // Delete user's message 3 seconds after using command
    console.log(msg.content + " was used by " + msg.member.user.tag)
 }
 
@@ -104,7 +105,8 @@ client.on("message", async (msg) => {
             msg.channel.messages
                .fetch(id)
                .then((message) => {
-                  message.delete({ timeout: 5000 }) // Delete bot message after 5 seconds
+                  message.delete({ timeout: 5000 })
+                  // Delete bot message after 5 seconds
                })
                .catch(console.error)
          })
@@ -131,7 +133,8 @@ client.on("message", async (msg) => {
             msg.channel.messages
                .fetch(id)
                .then((message) => {
-                  message.delete({ timeout: 5000 }) // Delete bot message after 5 seconds
+                  message.delete({ timeout: 5000 })
+                  // Delete bot message after 5 seconds
                })
                .catch(console.error)
          })
@@ -215,10 +218,10 @@ client.once("ready", () => {
    })
 })
 
-var streamUserCD = ""
-
+const streamedRecently = new Set()
 client.on("presenceUpdate", (oldPresence, newPresence) => {
-   if (!newPresence.activities || `${newPresence.user.tag}` == streamUserCD) {
+   if (!newPresence.activities || streamedRecently.has(newPresence.user.tag)) {
+      // Don't alert about same user streaming twice in a row
       return
    }
    newPresence.activities.forEach((activity) => {
@@ -233,9 +236,15 @@ client.on("presenceUpdate", (oldPresence, newPresence) => {
                   `**${newPresence.user.username} has started streaming!**\n\nCheck them out at ${activity.url}`
                )
             })
-         streamUserCD = `${newPresence.user.tag}`
+         streamedRecently.add(newPresence.user.tag)
+         setTimeout(() => {
+            // Removes the user from the set after timer
+            streamedRecently.delete(newPresence.user.tag)
+         }, 14400000) // 4 hour cooldown on each person's stream notif
       }
    })
 })
+
+client.on("error", console.error)
 
 client.login(process.env.DISCORD_TOKEN)
