@@ -12,15 +12,7 @@ Add me on discord *Robdog#6848* and show me your bots! Come ask questions too.
 
 You will need to install [Node.js](https://nodejs.org/en/), and clone this repo to somewhere on your device to edit. In a cmd located at your folder for the bot, run:
 
-* `npm install dotenv`
-
-* `npm install twit` - allows twitter functionality
-
-* `npm install discord.js`
-
-* `npm install ffmpeg-static` - allows sound files to be played in voice channels
-
-* `npm install opusscript` - allows sound files to be played in voice channels
+`npm install`
 
 Now you will have the correct npm packages installed. 
 
