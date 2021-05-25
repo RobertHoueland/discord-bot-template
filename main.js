@@ -193,7 +193,7 @@ client.once("ready", () => {
     client.user.setActivity(prefix + "help")
 
     var stream = twitterVar.stream("statuses/filter", {
-        follow: [process.env.TWITTER_USER_ID],
+        follow: process.env.TWITTER_USER_ID,
     })
 
     stream.on("tweet", function (tweet) {
